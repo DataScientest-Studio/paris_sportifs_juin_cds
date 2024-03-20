@@ -27,6 +27,10 @@ composite_image = Image.alpha_composite(background.convert("RGBA"), original_ima
 # Save the composite image with a white background
 composite_image.save("logo_datascientest_with_white_bg.png")
 
+#Charegement des df
+df=pd.read_csv("L1_all_seasons.csv")
+df1=pd.read_csv("main_df_roulant_reduced_col.csv")
+
 # Function to display the home page
 def display_home():
     st.write("Welcome to the Home page!")
@@ -35,7 +39,16 @@ def display_home():
 
 # Function to display the Les Données page
 def display_les_donnees():
-    st.write("Les Données page.")
+    st.write("Les Données")
+    st.write("Dataframe sur l'historique des equipes de L1 et leurs ELO")
+    st.dataframe(df.head())
+    st.write(df.shape)
+    st.dataframe(df.describe())
+    st.write("Dataframe sur les moyennes roulantes")
+    st.dataframe(df1.head())
+    st.write(df1.shape)
+    st.dataframe(df1.describe())
+    
 
 # Function to display the Modélisation page
 def display_modelisation():
@@ -53,8 +66,9 @@ def display_equipe_projet():
 st.title("Les paris sportifs, prédiction des résultats des matchs de football")
 
 # Create a menu in the sidebar
+
 menu = ["Home", "Les Données", "Modélisation", "Prédiction", "Equipe Projet"]
-choice = st.sidebar.selectbox("Menu", menu)
+choice = st.sidebar.selectbox("Menu",menu)
 
 # Display content based on menu choice
 if choice == "Home":
